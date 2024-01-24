@@ -1,9 +1,10 @@
 package com.zayzou.controller;
 
 import com.zayzou.domain.Customer;
+import com.zayzou.domain.dto.CustomerDto;
+import com.zayzou.mapper.Mapper;
 import com.zayzou.services.CustomerService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -13,39 +14,38 @@ import org.springframework.web.bind.annotation.*;
 public class CustomerController {
 
     private final CustomerService service;
+    private final Mapper<Customer, CustomerDto> mapper;
 
-    public CustomerController(CustomerService service) {
+    public CustomerController(CustomerService service, Mapper<Customer, CustomerDto> mapper) {
         this.service = service;
+        this.mapper = mapper;
     }
 
-    @GetMapping(produces = "application/json")
-    @ResponseStatus(HttpStatus.OK)
+    @GetMapping()
     public Iterable<Customer> getCustomers() {
         return service.getCustomers();
     }
 
-    @GetMapping(path = "/{}", produces = "application/json")
-    @ResponseStatus(HttpStatus.FOUND)
-    public Customer getCustomer(@RequestParam final long id) {
-        return service.getCustomer(id);
+    @GetMapping(path = "/{}")
+    public CustomerDto getCustomer(@RequestParam final long id) {
+        Customer customer = service.getCustomer(id);
+        return mapper.mapTo(customer);
     }
 
 
-    @PostMapping(produces = "application/json")
-    @ResponseStatus(HttpStatus.CREATED)
-    public Customer createCustomer(@RequestBody final Customer customer) {
-        return service.saveCustomer(customer);
+    @PostMapping()
+    public CustomerDto createCustomer(@RequestBody final CustomerDto customer) {
+        Customer saveCustomer = service.saveCustomer(mapper.mapFrom(customer));
+        return mapper.mapTo(saveCustomer);
     }
 
-
-    @PutMapping(produces = "application/json")
-    @ResponseStatus(HttpStatus.ACCEPTED)
-    public Customer updateCustomer(@RequestBody final Customer customer, @RequestParam final long id) {
-        return service.updateCustomer(customer, id);
+    @PutMapping()
+    public CustomerDto updateCustomer(@RequestBody final CustomerDto customer, @RequestParam final long id) {
+        Customer updateCustomer = service.updateCustomer(mapper.mapFrom(customer), id);
+        return mapper.mapTo(updateCustomer);
     }
 
     @DeleteMapping
-    @ResponseStatus(HttpStatus.ACCEPTED)
     public void deleteCustomer(@RequestParam final long id) {
         service.deleteCustomer(id);
     }
