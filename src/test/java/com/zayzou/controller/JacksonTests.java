@@ -2,8 +2,8 @@ package com.zayzou.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.zayzou.model.Customer;
-import com.zayzou.model.Product;
+import com.zayzou.domain.Customer;
+import com.zayzou.domain.Product;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

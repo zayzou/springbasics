@@ -1,7 +1,7 @@
 package com.zayzou.controller;
 
-import com.zayzou.model.Customer;
-import com.zayzou.model.Product;
+import com.zayzou.domain.Customer;
+import com.zayzou.domain.Product;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 

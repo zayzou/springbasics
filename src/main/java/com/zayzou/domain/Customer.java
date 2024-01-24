@@ -1,4 +1,4 @@
-package com.zayzou.model;
+package com.zayzou.domain;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

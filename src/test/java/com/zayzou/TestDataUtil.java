@@ -2,8 +2,7 @@ package com.zayzou;
 
 import com.zayzou.domain.Author;
 import com.zayzou.domain.Book;
-import com.zayzou.model.Customer;
-import com.zayzou.model.Product;
+import com.zayzou.domain.Customer;
 
 import java.util.List;
 

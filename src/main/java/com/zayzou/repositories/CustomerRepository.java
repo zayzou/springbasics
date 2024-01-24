@@ -1,6 +1,6 @@
 package com.zayzou.repositories;
 
-import com.zayzou.model.Customer;
+import com.zayzou.domain.Customer;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;

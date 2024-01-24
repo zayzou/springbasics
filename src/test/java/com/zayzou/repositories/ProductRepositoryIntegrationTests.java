@@ -1,12 +1,8 @@
 package com.zayzou.repositories;
 
 import com.zayzou.TestDataUtil;
-import com.zayzou.dao.AuthorDao;
-import com.zayzou.dao.impl.BookDaoImpl;
-import com.zayzou.domain.Author;
-import com.zayzou.domain.Book;
-import com.zayzou.model.Customer;
-import com.zayzou.model.Product;
+import com.zayzou.domain.Customer;
+import com.zayzou.domain.Product;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +10,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;

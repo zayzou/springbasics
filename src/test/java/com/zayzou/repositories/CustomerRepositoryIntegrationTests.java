@@ -1,8 +1,6 @@
 package com.zayzou.repositories;
 
-import com.zayzou.TestDataUtil;
-
-import com.zayzou.model.Customer;
+import com.zayzou.domain.Customer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
