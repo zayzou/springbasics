@@ -5,6 +5,7 @@ import com.zayzou.domain.dto.CustomerDto;
 import com.zayzou.mapper.Mapper;
 import com.zayzou.services.CustomerService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -33,7 +34,8 @@ public class CustomerController {
     }
 
 
-    @PostMapping()
+    @PostMapping(produces = "application/json")
+    @ResponseStatus(HttpStatus.CREATED)
     public CustomerDto createCustomer(@RequestBody final CustomerDto customer) {
         Customer saveCustomer = service.saveCustomer(mapper.mapFrom(customer));
         return mapper.mapTo(saveCustomer);
