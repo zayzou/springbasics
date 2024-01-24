@@ -2,6 +2,8 @@ package com.zayzou;
 
 import com.zayzou.domain.Author;
 import com.zayzou.domain.Book;
+import com.zayzou.model.Customer;
+import com.zayzou.model.Product;
 
 import java.util.List;
 
@@ -15,6 +17,10 @@ public final class TestDataUtil {
         return new Author(1L, "Zayzou", 30);
     }
 
+    public static Customer createTestCustomer() {
+        return new Customer(1L, "Zayzou", 30);
+    }
+
     public static List<Author> createTestAuthors() {
         return List.of(
                 new Author(1L, "Zayzou", 30),
@@ -25,8 +31,8 @@ public final class TestDataUtil {
 
     public static Book createTestBook() {
         return new Book("2113lnb", "Aloha is boma", 1L);
-
     }
+
 
     public static List<Book> createTestBooks() {
         return List.of(
