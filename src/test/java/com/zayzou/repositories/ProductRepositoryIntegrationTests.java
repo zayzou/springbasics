@@ -36,8 +36,6 @@ public class ProductRepositoryIntegrationTests {
     public void testThatBookCanBeCreatedAndRecalled() {
 
         Customer customer = TestDataUtil.createTestCustomer();
-
-
         Product product = new Product(1L, "Iphone 11", customer);
 
         underTest.save(product);
@@ -47,22 +45,8 @@ public class ProductRepositoryIntegrationTests {
     }
 
 
-   /* @Test
-    public void testThatMultipleBooksCanBeCreatedAndRecalled() {
-        Author author = TestDataUtil.createTestAuthor();
-        authorDao.create(author);
 
-        List<Book> books = TestDataUtil.createTestBooks();
-        books.forEach(book -> underTest.create(book));
-
-        List<Book> bookList = underTest.find();
-        assertThat(bookList)
-                .hasSize(3)
-                .containsExactly(books.getFirst(), books.get(1), books.getLast());
-
-    }
-
-
+/*
     @Test
     public void testThatBookCanBeUpdated() {
 
@@ -106,6 +90,7 @@ public class ProductRepositoryIntegrationTests {
         assertThat(result).isEmpty();
 
     }
-
 */
+
+
 }
