@@ -26,8 +26,8 @@ public class CustomerController {
         return service.getCustomers();
     }
 
-    @GetMapping(path = "/{}")
-    public CustomerDto getCustomer(@RequestParam final long id) {
+    @GetMapping(path = "/{id}")
+    public CustomerDto getCustomer(@PathVariable final long id) {
         Customer customer = service.getCustomer(id);
         return mapper.mapTo(customer);
     }
