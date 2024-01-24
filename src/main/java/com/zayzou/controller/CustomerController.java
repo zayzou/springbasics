@@ -6,6 +6,7 @@ import com.zayzou.mapper.Mapper;
 import com.zayzou.services.CustomerService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -35,10 +36,10 @@ public class CustomerController {
 
 
     @PostMapping(produces = "application/json")
-    @ResponseStatus(HttpStatus.CREATED)
-    public CustomerDto createCustomer(@RequestBody final CustomerDto customer) {
+
+    public ResponseEntity<CustomerDto> createCustomer(@RequestBody final CustomerDto customer) {
         Customer saveCustomer = service.saveCustomer(mapper.mapFrom(customer));
-        return mapper.mapTo(saveCustomer);
+        return new ResponseEntity<>(mapper.mapTo(saveCustomer), HttpStatus.CREATED);
     }
 
     @PutMapping()

@@ -1,6 +1,5 @@
 package com.zayzou.controller;
 
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zayzou.domain.Customer;
@@ -21,52 +20,56 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 @ExtendWith(SpringExtension.class)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 @AutoConfigureMockMvc
-public class CustomerControllerIntegrationTests {
+public class ProductControllerIntegrationTests {
 
+    ObjectMapper mapper;
     MockMvc mockMvc;
-    ObjectMapper objectMapper;
     final Customer customer = Customer
             .builder()
+            .id(1L)
             .name("Craig Walls")
             .age(63)
+            .build();
+    final Product product = Product.builder()
+            .id(1L)
+            .name("Spring in action")
+            .customer(customer)
             .build();
 
 
     @Autowired
-    public CustomerControllerIntegrationTests(MockMvc mockMvc) {
+    public ProductControllerIntegrationTests(MockMvc mockMvc) {
         this.mockMvc = mockMvc;
-        this.objectMapper = new ObjectMapper();
+        this.mapper = new ObjectMapper();
     }
 
-
     @Test
-    public void testThatCustomerCreatedSuccessfullyReturnsHttp201() throws Exception {
-        String customerJson = objectMapper.writeValueAsString(customer);
+    public void testThatCreateProductReturn201Created() throws Exception {
+        String productJson = mapper.writeValueAsString(product);
         mockMvc.perform(
-                MockMvcRequestBuilders.post("/customers")
+                MockMvcRequestBuilders.post("/products")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(customerJson)
+                        .content(productJson)
+
         ).andExpect(
                 MockMvcResultMatchers.status().isCreated()
         );
-
     }
 
     @Test
-    public void testThatCustomerCreatedSuccessfullyReturnsSavedCustomer() throws Exception {
-        String customerJson = objectMapper.writeValueAsString(customer);
-        mockMvc.perform(
-                MockMvcRequestBuilders.post("/customers")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(customerJson)
-        ).andExpect(
-                MockMvcResultMatchers
-                        .jsonPath("$.id").isNumber()
-        ).andExpect(
-                MockMvcResultMatchers.jsonPath("$.name").value("Craig Walls")
-        ).andExpect(
-                MockMvcResultMatchers.jsonPath("$.age").value(63)
-        );
+    public void testThatCreateProductSuccessfullyReturnSavedProduct() throws Exception {
+        String productJson = mapper.writeValueAsString(product);
 
+        mockMvc.perform(
+                MockMvcRequestBuilders.post("/products")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(productJson)
+        ).andExpect(
+                MockMvcResultMatchers.jsonPath("$.id").isNumber()
+        ).andExpect(
+                MockMvcResultMatchers.jsonPath("$.name").value("Spring in action")
+        ).andExpect(
+                MockMvcResultMatchers.jsonPath("$.customer").value(customer)
+        );
     }
 }
